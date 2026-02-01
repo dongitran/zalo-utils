@@ -80,7 +80,6 @@ export function Hero() {
           >
             {/* Badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
               CLI Tool for Developers
             </div>
 
@@ -88,14 +87,12 @@ export function Hero() {
             <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
               Automate Zalo with{" "}
               <span className="relative inline-block">
-                One Command
-                <motion.span
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute -right-6 -top-2 text-2xl"
-                >
-                  ✦
-                </motion.span>
+                <span className="relative">
+                  One Command
+                  <svg className="absolute -right-8 -top-4 h-8 w-8 text-indigo-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                </span>
               </span>
             </h1>
 
@@ -130,8 +127,7 @@ export function Hero() {
                 href="#how-it-works"
                 className="group inline-flex items-center gap-2 text-white/70 transition-colors hover:text-white"
               >
-                See how it works
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                See how it works →
               </a>
             </div>
           </motion.div>
