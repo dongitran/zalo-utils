@@ -3,13 +3,12 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight,
-  Shield,
-  MessageCircle,
-  Zap,
-  Boxes,
-  Video,
   Terminal,
+  MessageSquare,
+  Zap,
+  RefreshCw,
+  Play,
+  Code,
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,11 +24,11 @@ const codeLines = [
   '=> {}',
 ];
 
-const badges = [
-  { icon: Shield, label: "Full automation" },
-  { icon: MessageCircle, label: "Rich messaging" },
+const values = [
+  { icon: Terminal, label: "Full automation" },
+  { icon: MessageSquare, label: "Rich messaging" },
   { icon: Zap, label: "Lightning fast" },
-  { icon: Boxes, label: "Production ready" },
+  { icon: RefreshCw, label: "Production ready" },
 ];
 
 function CodeRain() {
@@ -38,15 +37,15 @@ function CodeRain() {
   }, []);
 
   return (
-    <div className="h-full overflow-hidden font-mono text-[11px] leading-5 text-white/40">
+    <div className="h-full overflow-hidden font-mono text-[11px] leading-5 text-[#94a3b8]">
       <motion.div
-        animate={{ y: [0, -100] }}
+        animate={{ y: [0, -200] }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         className="space-y-1"
       >
         {lines.map((line, i) => (
           <div key={i} className="flex gap-2">
-            <span className="w-6 text-right text-white/20">{(i % 20) + 1}</span>
+            <span className="w-6 text-right text-[#475569]">{(i % 20) + 1}</span>
             <span>{line}</span>
           </div>
         ))}
@@ -59,71 +58,67 @@ export function Hero() {
   const [activeTab, setActiveTab] = useState<"video" | "terminal">("terminal");
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-neutral-950 pt-24">
+    <section className="relative min-h-screen overflow-hidden bg-[#0f172a] pt-24">
       {/* Background effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(99,102,241,0.15),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.1),transparent_50%)]" />
-      <div 
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#3b82f6]/5 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-grid pointer-events-none" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="text-center lg:text-left"
           >
             {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70">
-              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="mb-6 inline-flex items-center justify-center rounded-full border border-[#3b82f6]/50 bg-[#3b82f6]/10 px-3 py-1 text-xs font-medium text-[#3b82f6]">
               CLI Tool for Developers
-            </div>
+            </span>
 
             {/* Heading */}
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mb-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
               Automate Zalo with{" "}
-              <span className="relative inline-block">
-                <span className="relative">
-                  One Command
-                  <svg className="absolute -right-8 -top-4 h-8 w-8 text-indigo-400" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                  </svg>
-                </span>
+              <span className="relative inline-block text-[#3b82f6]">
+                One Command
+                <svg 
+                  className="absolute -bottom-2 left-0 w-full h-3 text-[#3b82f6]/30" 
+                  viewBox="0 0 200 12" 
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path d="M0,8 Q50,0 100,8 T200,8" fill="none" stroke="currentColor" strokeWidth="3" />
+                </svg>
               </span>
             </h1>
 
             {/* Description */}
-            <p className="mt-6 text-lg leading-relaxed text-white/60">
+            <p className="mx-auto mb-8 max-w-xl text-lg text-[#94a3b8] lg:mx-0">
               Send messages, manage groups, build integrations, and listen for real-time events — 
               all from your terminal. No browser, no GUI, just pure CLI power.
             </p>
 
-            {/* Badges */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {badges.map((badge) => (
-                <div
-                  key={badge.label}
-                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70"
-                >
-                  <badge.icon className="h-4 w-4" />
-                  {badge.label}
+            {/* Values */}
+            <div className="mb-8 grid max-w-md grid-cols-2 gap-3 mx-auto lg:mx-0">
+              {values.map((value) => (
+                <div key={value.label} className="flex items-center gap-2 text-sm text-[#94a3b8]">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#3b82f6]/10">
+                    <value.icon className="h-4 w-4 text-[#3b82f6]" />
+                  </div>
+                  <span>{value.label}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-medium text-neutral-950 transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10">
+            <div className="flex flex-col items-center gap-4 sm:flex-row justify-center lg:justify-start">
+              <button className="btn-cta inline-flex items-center gap-2 rounded-lg px-8 py-3 text-lg font-medium text-white">
                 Get Started
               </button>
               <a
                 href="#how-it-works"
-                className="group inline-flex items-center gap-2 text-white/70 transition-colors hover:text-white"
+                className="text-sm text-[#94a3b8] transition-colors hover:text-white"
               >
                 See how it works →
               </a>
@@ -138,17 +133,17 @@ export function Hero() {
             className="relative"
           >
             {/* Tab switcher */}
-            <div className="mb-4 flex gap-2">
+            <div className="mb-4 flex justify-center gap-2">
               <button
                 onClick={() => setActiveTab("video")}
                 className={cn(
                   "flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all",
                   activeTab === "video"
-                    ? "bg-white text-neutral-950"
-                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                    ? "border border-[#3b82f6]/30 bg-[#3b82f6]/20 text-[#3b82f6]"
+                    : "bg-[#1e293b]/50 text-[#94a3b8] hover:bg-[#1e293b]"
                 )}
               >
-                <Video className="h-4 w-4" />
+                <Play className="h-4 w-4" />
                 Video
               </button>
               <button
@@ -156,17 +151,17 @@ export function Hero() {
                 className={cn(
                   "flex items-center gap-2 rounded-lg px-4 py-2 text-sm transition-all",
                   activeTab === "terminal"
-                    ? "bg-white text-neutral-950"
-                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                    ? "border border-[#3b82f6]/30 bg-[#3b82f6]/20 text-[#3b82f6]"
+                    : "bg-[#1e293b]/50 text-[#94a3b8] hover:bg-[#1e293b]"
                 )}
               >
-                <Terminal className="h-4 w-4" />
+                <Code className="h-4 w-4" />
                 Terminal
               </button>
             </div>
 
             {/* Content */}
-            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-neutral-900/50 backdrop-blur-sm">
+            <div className="relative mx-auto aspect-video max-w-[640px] overflow-hidden rounded-2xl shadow-2xl">
               <AnimatePresence mode="wait">
                 {activeTab === "terminal" ? (
                   <motion.div
@@ -174,43 +169,39 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="grid min-h-[400px] grid-cols-1 sm:grid-cols-2"
+                    className="terminal h-full"
                   >
-                    {/* Terminal left */}
-                    <div className="border-b border-white/10 p-4 sm:border-b-0 sm:border-r">
-                      {/* Terminal header */}
-                      <div className="mb-4 flex items-center gap-2 border-b border-white/10 pb-3">
-                        <div className="flex gap-1.5">
-                          <div className="h-3 w-3 rounded-full bg-red-500" />
-                          <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                          <div className="h-3 w-3 rounded-full bg-green-500" />
-                        </div>
-                        <span className="ml-2 text-xs text-white/40">zsh</span>
-                      </div>
-                      <CodeRain />
+                    <div className="terminal-header">
+                      <div className="terminal-dot terminal-dot-red" />
+                      <div className="terminal-dot terminal-dot-yellow" />
+                      <div className="terminal-dot terminal-dot-green" />
+                      <span className="ml-3 text-xs text-[#94a3b8]">zsh</span>
                     </div>
-
-                    {/* Info panel */}
-                    <div className="p-4">
-                      <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/60">
-                        zalo-utils.dev
+                    <div className="grid h-[calc(100%-44px)] grid-cols-1 sm:grid-cols-2">
+                      <div className="border-b border-white/10 p-4 sm:border-b-0 sm:border-r">
+                        <CodeRain />
                       </div>
-                      <p className="mb-4 text-sm text-white/70">
-                        Install Zalo Utils in seconds
-                      </p>
-                      <div className="overflow-hidden rounded-lg border border-white/10 bg-black/40 p-3">
-                        <code className="block text-xs text-white/80">
-                          $ curl -fsSL get.zalo-utils.dev/install.sh | bash
-                        </code>
-                      </div>
-                      <div className="mt-4 space-y-2">
-                        <div className="flex items-center gap-2 text-sm text-white/60">
-                          <Check className="h-4 w-4 text-emerald-400" />
-                          QR Login · persistent session per profile
+                      <div className="p-4">
+                        <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#94a3b8]">
+                          zalo-utils.dev
                         </div>
-                        <div className="flex items-center gap-2 text-sm text-white/60">
-                          <Check className="h-4 w-4 text-emerald-400" />
-                          Realtime webhooks · JSON output
+                        <p className="mb-4 text-sm text-[#94a3b8]">
+                          Install Zalo Utils in seconds
+                        </p>
+                        <div className="overflow-hidden rounded-lg border border-white/10 bg-black/40 p-3">
+                          <code className="block text-xs text-[#e2e8f0]">
+                            $ curl -fsSL get.zalo-utils.dev/install.sh | bash
+                          </code>
+                        </div>
+                        <div className="mt-4 space-y-2">
+                          <div className="flex items-center gap-2 text-sm text-[#94a3b8]">
+                            <Check className="h-4 w-4 text-emerald-400" />
+                            <span>QR Login · persistent session per profile</span>
+                          </div>
+                          <div className="flex items-center gap-2 text-sm text-[#94a3b8]">
+                            <Check className="h-4 w-4 text-emerald-400" />
+                            <span>Webhook realtime · JSON output</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -221,14 +212,14 @@ export function Hero() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex min-h-[400px] items-center justify-center"
+                    className="flex h-full items-center justify-center rounded-2xl bg-[#0d1117]"
                   >
                     <div className="text-center">
                       <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/10">
-                        <Video className="h-8 w-8 text-white/60" />
+                        <Play className="h-6 w-6 text-[#94a3b8]" />
                       </div>
-                      <p className="text-white/60">Video demo placeholder</p>
-                      <p className="mt-2 text-sm text-white/40">
+                      <p className="text-[#94a3b8]">Video demo placeholder</p>
+                      <p className="mt-1 text-xs text-[#64748b]">
                         Replace with your demo video
                       </p>
                     </div>
