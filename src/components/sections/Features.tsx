@@ -1,91 +1,134 @@
+import { motion } from "framer-motion";
 import {
-  BadgeCheck,
-  Blocks,
-  Braces,
-  RefreshCcw,
-  ScanQrCode,
+  ScanLine,
   Users,
+  MessageSquare,
   Webhook,
+  Users2,
+  Braces,
+  RefreshCw,
   Zap,
 } from "lucide-react";
 
 const features = [
   {
-    icon: ScanQrCode,
-    title: "Đăng nhập QR",
-    desc: "Quét bằng app, lưu phiên an toàn trên máy. Không cần copy cookie thủ công.",
+    icon: ScanLine,
+    title: "QR Code Login",
+    description: "Scan with Zalo app, credentials persist securely on your device.",
   },
   {
     icon: Users,
-    title: "Đa tài khoản",
-    desc: "Chuyển profile nhanh bằng --profile để quản lý nhiều account.",
+    title: "Multi-Account",
+    description: "Manage multiple profiles seamlessly with the --profile flag.",
   },
   {
-    icon: Blocks,
-    title: "Nhắn tin phong phú",
-    desc: "Text, ảnh, video, voice, sticker… tối ưu cho automation.",
+    icon: MessageSquare,
+    title: "Rich Messaging",
+    description: "Send text, images, videos, voice, stickers and more.",
   },
   {
     icon: Webhook,
-    title: "Listener realtime",
-    desc: "Forward sự kiện vào webhook, hỗ trợ tự khởi động lại khi lỗi.",
+    title: "Real-time Listener",
+    description: "Monitor messages with webhook integration and auto-restart.",
   },
   {
-    icon: BadgeCheck,
-    title: "Quản lý nhóm",
-    desc: "Tạo nhóm, thêm/xoá thành viên, đổi cài đặt… ngay trong CLI.",
+    icon: Users2,
+    title: "Group Management",
+    description: "Create, manage, and administer Zalo groups effortlessly.",
   },
   {
     icon: Braces,
-    title: "Raw JSON output",
-    desc: "Dễ dàng pipe sang script/agent với --raw, chuẩn hoá dữ liệu.",
+    title: "Raw JSON Output",
+    description: "Programmatic integration with --raw flag for automation.",
   },
   {
-    icon: RefreshCcw,
-    title: "Auto-restart",
-    desc: "Exponential backoff để chạy production bền bỉ.",
+    icon: RefreshCw,
+    title: "Auto-Restart",
+    description: "Exponential backoff for production-ready reliability.",
   },
   {
     icon: Zap,
-    title: "Batch operations",
-    desc: "Upload/download song song để nhanh và tiết kiệm thời gian.",
+    title: "Batch Operations",
+    description: "Parallel file uploads and downloads for efficiency.",
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export function Features() {
   return (
-    <section id="features" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-      <div className="max-w-2xl">
-        <h2 className="text-2xl font-semibold md:text-3xl">
-          Mọi thứ bạn cần để tự động hoá nhắn tin
-        </h2>
-        <p className="mt-2 text-white/65">
-          Dành cho dev muốn CLI mạnh, ổn định, dễ tích hợp vào hệ thống.
-        </p>
-      </div>
+    <section id="features" className="relative py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Everything you need for Zalo automation
+          </h2>
+          <p className="mt-4 text-lg text-white/60">
+            Built for developers who want powerful, reliable CLI tools for Zalo messaging.
+          </p>
+        </motion.div>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map((f) => (
-          <div
-            key={f.title}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 transition hover:bg-white/7"
-          >
-            <f.icon className="h-5 w-5 text-white/80" />
-            <h3 className="mt-3 font-semibold">{f.title}</h3>
-            <p className="mt-2 text-sm text-white/65">{f.desc}</p>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {features.map((feature) => (
+            <motion.div
+              key={feature.title}
+              variants={itemVariants}
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-white/20 hover:bg-white/[0.04]"
+            >
+              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                <feature.icon className="h-5 w-5 text-white/70" />
+              </div>
+              <h3 className="mb-2 font-medium text-white">{feature.title}</h3>
+              <p className="text-sm leading-relaxed text-white/50">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Bottom banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 rounded-2xl border border-white/10 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-6"
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
+              <Zap className="h-5 w-5 text-indigo-400" />
+            </div>
+            <div>
+              <h4 className="font-medium text-white">Designed for AI agent / CLI workflows</h4>
+              <p className="text-sm text-white/60">
+                Describe what you want in natural language, and let your AI assistant handle the commands.
+              </p>
+            </div>
           </div>
-        ))}
-      </div>
-
-      <div className="mt-10 rounded-2xl border border-white/10 bg-gradient-to-r from-white/10 to-white/5 p-5">
-        <div className="flex items-center gap-2 text-sm text-white/70">
-          <Blocks className="h-4 w-4" />
-          <span>Thiết kế cho AI agent / CLI workflows</span>
-        </div>
-        <p className="mt-2 text-sm text-white/65">
-          Bạn mô tả yêu cầu bằng ngôn ngữ tự nhiên, agent gọi lệnh CLI để gửi tin nhắn,
-          nhận phản hồi và quản lý nhóm.
-        </p>
+        </motion.div>
       </div>
     </section>
   );

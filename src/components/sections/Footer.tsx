@@ -1,45 +1,79 @@
+import { motion } from "framer-motion";
+
+const footerLinks = {
+  resources: [
+    { label: "Support", href: "#support" },
+    { label: "Documentation", href: "#docs" },
+    { label: "Blog", href: "#blog" },
+  ],
+  legal: [
+    { label: "Terms of Service", href: "#terms" },
+    { label: "Privacy Policy", href: "#privacy" },
+    { label: "Shipping Policy", href: "#shipping" },
+  ],
+};
+
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-black py-16">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-12 md:grid-cols-4">
-          <div className="col-span-2">
+    <footer className="border-t border-white/10 bg-neutral-950">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                <span className="text-xs font-bold">Z</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10">
+                <span className="text-lg font-bold">Z</span>
               </div>
-              <span className="font-semibold tracking-tight">zalo-utils</span>
+              <span className="text-lg font-semibold tracking-tight">zalo-utils</span>
             </div>
-            <p className="mt-4 max-w-xs text-sm text-white/50 leading-relaxed">
-              Công cụ CLI mạnh mẽ để tự động hoá tin nhắn. 
-              Tích hợp AI, quản lý nhóm và xây dựng hệ thống tự động ngay từ terminal của bạn.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/50">
+              Powerful CLI tool for Zalo messaging automation. Automate messaging, 
+              manage groups, and build integrations from your terminal.
             </p>
           </div>
-          
+
+          {/* Resources */}
           <div>
-            <h4 className="text-sm font-semibold text-white">Tài nguyên</h4>
-            <ul className="mt-4 space-y-2 text-sm text-white/50">
-              <li><a href="#docs" className="hover:text-white transition">Tài liệu</a></li>
-              <li><a href="#support" className="hover:text-white transition">Hỗ trợ</a></li>
-              <li><a href="#blog" className="hover:text-white transition">Blog</a></li>
+            <h4 className="text-sm font-medium text-white">Resources</h4>
+            <ul className="mt-4 space-y-3">
+              {footerLinks.resources.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-white/50 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Legal */}
           <div>
-            <h4 className="text-sm font-semibold text-white">Pháp lý</h4>
-            <ul className="mt-4 space-y-2 text-sm text-white/50">
-              <li><a href="#terms" className="hover:text-white transition">Điều khoản dịch vụ</a></li>
-              <li><a href="#privacy" className="hover:text-white transition">Chính sách bảo mật</a></li>
+            <h4 className="text-sm font-medium text-white">Legal</h4>
+            <ul className="mt-4 space-y-3">
+              {footerLinks.legal.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm text-white/50 transition-colors hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-16 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between gap-4">
-          <p className="text-xs text-white/30">
-            © 2026 Zalo Utils. Sản phẩm độc lập.
+        {/* Bottom */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
+          <p className="text-sm text-white/40">
+            © 2026 zalo-utils. Not affiliated with Zalo or VNG Corporation.
           </p>
-          <p className="text-xs text-white/30">
-            Không liên kết với Zalo hoặc VNG Corporation.
+          <p className="text-sm text-white/40">
+            All rights reserved.
           </p>
         </div>
       </div>
