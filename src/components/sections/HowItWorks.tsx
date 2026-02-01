@@ -5,7 +5,16 @@ import { motion } from "framer-motion";
 import { CreditCard, Mail, Key, Download, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const steps = [
+type Step = {
+  id: string;
+  title: string;
+  description: string;
+  hasCode?: boolean;
+  code?: string | { macos: string; windows: string };
+  icon: React.ElementType;
+};
+
+const steps: Step[] = [
   {
     id: "1",
     title: "Install zalo-utils",
@@ -102,9 +111,9 @@ export function HowItWorks() {
                       <p className="mb-4 text-white/60">{step.description}</p>
 
                       {/* Code block */}
-                      {step.hasCode && (
+                      {step.hasCode && step.code && (
                         <div className="mt-4">
-                          {step.id === "1" ? (
+                          {step.id === "1" && typeof step.code === "object" ? (
                             <>
                               {/* OS Switcher */}
                               <div className="mb-3 flex gap-2">
@@ -137,11 +146,11 @@ export function HowItWorks() {
                                 </code>
                               </pre>
                             </>
-                          ) : (
+                          ) : typeof step.code === "string" ? (
                             <pre className="overflow-x-auto rounded-lg border border-white/10 bg-black/40 p-4">
                               <code className="text-sm text-white/80">{step.code}</code>
                             </pre>
-                          )}
+                          ) : null}
                         </div>
                       )}
                     </div>
