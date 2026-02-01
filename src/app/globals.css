@@ -34,6 +34,19 @@ pre, code {
   white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Prevent text overflow on mobile */
+p, h1, h2, h3, h4, h5, h6, span, a, li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Images and media */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Custom fonts */

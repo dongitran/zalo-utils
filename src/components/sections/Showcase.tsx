@@ -101,21 +101,21 @@ export function Showcase() {
             <div className="space-y-4">
               <div className="rounded-xl border border-white/10 bg-black/30 p-4">
                 <p className="mb-2 text-xs text-white/40">You tell your AI:</p>
-                <p className="text-sm text-white/80">
+                <p className="break-words text-sm text-white/80">
                   &ldquo;Send a message to my project-team 011110100110001101100001 group saying the deploy is complete&rdquo;
                 </p>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/30 p-4">
                 <p className="mb-2 text-xs text-white/40">AI executes zalo-utils:</p>
-                <pre className="overflow-x-auto rounded-lg bg-black/50 p-3 text-xs text-white/80">
+                <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-black/50 p-3 text-xs text-white/80">
                   <code>$ zalo-utils msg send -g 011110100110001101100001 "The deploy is complete!"</code>
                 </pre>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-black/30 p-4">
                 <p className="mb-2 text-xs text-white/40">AI can also listen for responses:</p>
-                <pre className="overflow-x-auto rounded-lg bg-black/50 p-3 text-xs text-white/80">
+                <pre className="overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-black/50 p-3 text-xs text-white/80">
                   <code>$ zalo-utils listen --webhook http://localhost:3000/api/zalo</code>
                 </pre>
               </div>
