@@ -190,7 +190,7 @@ export function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative mx-auto aspect-video max-w-[640px] overflow-hidden rounded-2xl shadow-2xl">
+            <div className="relative mx-auto w-full max-w-[640px] overflow-hidden rounded-2xl shadow-2xl">
               <AnimatePresence mode="wait">
                 {activeTab === "terminal" ? (
                   <motion.div
