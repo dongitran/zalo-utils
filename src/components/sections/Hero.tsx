@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Terminal,
@@ -31,25 +31,54 @@ const values = [
   { icon: RefreshCw, label: "Production ready" },
 ];
 
-function CodeRain() {
-  const lines = useMemo(() => {
-    return [...codeLines, ...codeLines, ...codeLines, ...codeLines, ...codeLines];
-  }, []);
+function TypingAnimation() {
+  const [displayText, setDisplayText] = useState("");
+  const [currentLine, setCurrentLine] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    const line = codeLines[currentLine];
+    if (charIndex < line.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + line[charIndex]);
+        setCharIndex(charIndex + 1);
+      }, 50);
+      return () => clearTimeout(timeout);
+    } else {
+      const timeout = setTimeout(() => {
+        setDisplayText("");
+        setCharIndex(0);
+        setCurrentLine((currentLine + 1) % codeLines.length);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [charIndex, currentLine]);
 
   return (
     <div className="h-full overflow-hidden font-mono text-[11px] leading-5 text-[#94a3b8]">
-      <motion.div
-        animate={{ y: [0, -200] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="space-y-1"
-      >
-        {lines.map((line, i) => (
-          <div key={i} className="flex gap-2">
-            <span className="w-6 text-right text-[#475569]">{(i % 20) + 1}</span>
-            <span>{line}</span>
-          </div>
+      <div className="space-y-1">
+        {codeLines.map((line, i) => (
+          <motion.div 
+            key={i} 
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="flex gap-2"
+          >
+            <span className="w-6 text-right text-[#475569]">{i + 1}</span>
+            <span className={i === currentLine ? "text-[#60a5fa]" : ""}>
+              {i === currentLine ? displayText : line}
+              {i === currentLine && (
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.5, repeat: Infinity }}
+                  className="inline-block w-2 h-4 bg-[#60a5fa] ml-0.5"
+                />
+              )}
+            </span>
+          </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -179,7 +208,7 @@ export function Hero() {
                     </div>
                     <div className="grid h-[calc(100%-44px)] grid-cols-1 sm:grid-cols-2">
                       <div className="border-b border-white/10 p-4 sm:border-b-0 sm:border-r">
-                        <CodeRain />
+                        <TypingAnimation />
                       </div>
                       <div className="p-4">
                         <div className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#94a3b8]">

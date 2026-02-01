@@ -67,7 +67,15 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  },
 };
 
 export function Features() {
@@ -95,15 +103,23 @@ export function Features() {
           viewport={{ once: true }}
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <motion.div
               key={feature.title}
               variants={itemVariants}
-              className="glass-card p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#3b82f6]/10"
+              whileHover={{ 
+                y: -4, 
+                boxShadow: "0 20px 40px -15px rgba(59, 130, 246, 0.3)",
+                transition: { duration: 0.2 }
+              }}
+              className="glass-card group p-6 cursor-pointer"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#3b82f6]/10">
-                <feature.icon className="h-6 w-6 text-[#3b82f6]" />
-              </div>
+              <motion.div 
+                className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[#3b82f6]/10 transition-colors group-hover:bg-[#3b82f6]/20"
+                whileHover={{ rotate: 5, scale: 1.05 }}
+              >
+                <feature.icon className="h-6 w-6 text-[#3b82f6] transition-transform group-hover:scale-110" />
+              </motion.div>
               <h3 className="mb-2 text-lg font-semibold text-white">{feature.title}</h3>
               <p className="text-sm text-[#94a3b8]">{feature.description}</p>
             </motion.div>
