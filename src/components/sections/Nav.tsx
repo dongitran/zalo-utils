@@ -40,10 +40,15 @@ export function Nav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-gradient-to-br from-white/20 to-white/5">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/20 bg-white/10">
             <span className="text-lg font-bold">Z</span>
           </div>
-          <span className="text-lg font-semibold tracking-tight">zalo-utils</span>
+          <div className="flex items-center gap-1">
+            <span className="text-lg font-semibold tracking-tight">zalo-utils</span>
+            <span className="rounded-md bg-white/10 px-1.5 py-0.5 text-xs text-white/70">
+              CLI
+            </span>
+          </div>
         </a>
 
         {/* Navigation */}
@@ -65,12 +70,9 @@ export function Nav() {
             English
             <ChevronDown className="h-4 w-4" />
           </button>
-          <a
-            href="#pricing"
-            className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-neutral-950 transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10"
-          >
+          <button className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-neutral-950 transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10">
             Get License
-          </a>
+          </button>
         </div>
       </div>
     </motion.header>

@@ -80,6 +80,7 @@ export function Hero() {
           >
             {/* Badge */}
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/70">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
               CLI Tool for Developers
             </div>
 
@@ -117,12 +118,9 @@ export function Hero() {
 
             {/* CTA Buttons */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href="#how-it-works"
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-medium text-neutral-950 transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10"
-              >
+              <button className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-base font-medium text-neutral-950 transition-all hover:bg-white/90 hover:shadow-lg hover:shadow-white/10">
                 Get Started
-              </a>
+              </button>
               <a
                 href="#how-it-works"
                 className="group inline-flex items-center gap-2 text-white/70 transition-colors hover:text-white"
