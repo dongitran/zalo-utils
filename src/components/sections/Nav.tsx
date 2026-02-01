@@ -40,23 +40,9 @@ export function Nav() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2">
-          <img 
-            src="/logo-icon.svg" 
-            alt="Zalo Utils" 
-            className="h-8 w-8"
-            onError={(e) => {
-              // Fallback if logo doesn't exist
-              const target = e.target as HTMLImageElement;
-              target.style.display = 'none';
-              const parent = target.parentElement;
-              if (parent) {
-                const fallback = document.createElement('div');
-                fallback.className = 'flex h-8 w-8 items-center justify-center rounded-lg bg-[#3b82f6]';
-                fallback.innerHTML = '<span class="text-white font-bold text-sm">Z</span>';
-                parent.appendChild(fallback);
-              }
-            }}
-          />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#3b82f6]">
+            <span className="text-sm font-bold text-white">Z</span>
+          </div>
           <span className="font-mono text-lg font-bold">zalo-utils</span>
         </a>
 
